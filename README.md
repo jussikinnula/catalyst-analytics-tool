@@ -1,4 +1,4 @@
-# catalyst-analytics-tools
+# catalyst-analytics-tool
 
 This is just another Very simple analytics tool.
 
