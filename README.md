@@ -17,7 +17,7 @@ http://yourserver.com/rest/request
 
 To deploy this Catalyst app to Heroku, create a new app:
 
-    heroku create angular-webshop \
+    heroku create my-app-name \
         --stack cedar-14 \
         --region eu \
         --buildpack http://github.com/pnu/heroku-buildpack-perl.git \
