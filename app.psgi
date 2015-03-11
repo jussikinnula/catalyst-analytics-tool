@@ -5,6 +5,7 @@ use Env::Heroku::Pg;
 use WebApp;
 use Plack::Builder;
 use Plack::Response;
+use Plack::Middleware::Auth::Basic;
 use Text::Xslate;
 use Encode qw(encode_utf8);
 
@@ -25,6 +26,15 @@ my $spa = sub { my ($root,$base) = @_; builder {
 builder {
     enable 'ReverseProxy';
     enable 'ErrorDocument', 500 => 'root/assets/html/500.html';
+
+    # Extra security (BasicAuth), if needed
+    enable_if { $_[0]->{PATH_INFO} =~ m{^/(rest)(_[^/]+)?/} and $ENV{AUTH_USERNAME} }
+        'Auth::Basic', authenticator => sub {
+        my ($username,$password) = @_;
+        return  ( $ENV{AUTH_USERNAME} && $username eq $ENV{AUTH_USERNAME} and
+                ! $ENV{AUTH_PASSWORD} || $password eq $ENV{AUTH_PASSWORD} );
+    };
+
     mount '/app/build' => $spa->('root/app/build','/build/');
     mount '/app' => $spa->('root/app/bin','/');
     mount '/' => $app;

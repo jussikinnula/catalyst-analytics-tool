@@ -15,5 +15,6 @@ requires 'LWP::Protocol::https';
 requires 'Plack::Response';
 requires 'Plack::Middleware::DirIndex';
 requires 'Plack::Middleware::CrossOrigin';
+requires 'Plack::Middleware::Auth::Basic';
 requires 'Throwable';
 requires 'Try::Tiny';
