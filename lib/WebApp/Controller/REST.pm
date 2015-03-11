@@ -21,7 +21,7 @@ sub request_GET {
 
     $requests = $requests->search(undef,{
         order_by => [
-            { '-DESC' => 'requested' }
+            { '-DESC' => 'created' }
         ],
         page => $params->{'page'} || 1,
         rows => $params->{'rows'} || 50,
