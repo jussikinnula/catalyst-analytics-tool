@@ -15,7 +15,7 @@ __PACKAGE__->add_columns(
     "created",
     { data_type => "timestamp with time zone" },
     "parameters",
-    { data_type => "json" },
+    { data_type => "jsonb" },
 );
 
 __PACKAGE__->set_primary_key("id");
